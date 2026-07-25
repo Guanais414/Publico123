@@ -326,12 +326,12 @@ export default function App() {
 
   // Main app
   return (
-    <div className={`h-dynamic flex flex-col relative overflow-hidden ${settings.theme === 'dark' ? 'dark' : ''}`}>
+    <div className={`min-h-dynamic ${settings.theme === 'dark' ? 'dark' : ''}`}>
       <BackgroundLayer bg={settings.background} />
       <AmbientMusic />
       <NotificationSystem onNavigate={(s) => setScreen(s as Screen)} />
-      <div className="flex-1 flex flex-col relative z-10 text-gray-900 dark:text-gray-100 transition-colors overflow-hidden">
-        <main className="flex-1 overflow-y-auto overflow-x-hidden pb-28 pt-safe">
+      <div className="min-h-dynamic text-gray-900 dark:text-gray-100 transition-colors">
+        <main className="pb-24 min-h-dynamic pt-safe">
           <Suspense fallback={
             <div className="flex items-center justify-center h-[60vh]">
               <div className="w-8 h-8 rounded-full border-2 border-green-500 border-t-transparent animate-spin" />
@@ -371,7 +371,7 @@ export default function App() {
         <ConfettiLayer particles={particles} />
         <LevelUpOverlay level={levelUp ?? 0} show={levelUp !== null} />
         {xpPopup && (
-          <div className="absolute top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-fade-in">
+          <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none animate-fade-in">
             <div className="bg-amber-400 text-white font-bold px-4 py-2 rounded-full shadow text-sm">
               +{xpPopup} XP
             </div>
@@ -379,7 +379,7 @@ export default function App() {
         )}
 
         {toast && (
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 animate-slide-up pointer-events-none">
+          <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 animate-slide-up pointer-events-none">
             <div className="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-bold px-5 py-2.5 rounded-full shadow-lg">{toast}</div>
           </div>
         )}
@@ -388,14 +388,14 @@ export default function App() {
           <Achievements game={game} onClose={() => setShowAchievements(false)} onGainXp={gainXp} />
         )}
 
-        <nav className="absolute bottom-0 left-0 right-0 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 pb-safe">
-          <div className="max-w-md mx-auto flex justify-around items-center px-0.5 py-1.5 overflow-x-auto no-scrollbar">
+        <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 pb-safe">
+          <div className="max-w-md mx-auto grid grid-cols-6 gap-0.5 px-1 py-1.5">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const active = screen === item.id;
               return (
                 <button key={item.id} onClick={() => setScreen(item.id)}
-                  className={`flex flex-col items-center gap-0.5 py-1.5 px-1.5 rounded-2xl transition-all flex-shrink-0 ${active ? 'scale-105' : 'opacity-50'}`}>
+                  className={`flex flex-col items-center justify-center gap-0.5 py-1 rounded-2xl transition-all ${active ? 'scale-105' : 'opacity-50'}`}>
                   <div className={`p-1.5 rounded-xl transition-all ${active ? 'bg-green-500 text-white shadow-md shadow-green-500/30' : 'text-gray-400'}`}>
                     <Icon size={16} />
                   </div>

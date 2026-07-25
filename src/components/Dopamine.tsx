@@ -76,7 +76,7 @@ export function useConfetti() {
 
 export function ConfettiLayer({ particles }: { particles: Particle[] }) {
   return (
-    <div className="absolute inset-0 pointer-events-none z-[100] overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
       {particles.map((p) => (
         <div
           key={p.id}
@@ -109,7 +109,7 @@ function StarShape({ color, size }: { color: string; size: number }) {
 export function LevelUpOverlay({ level, show }: { level: number; show: boolean }) {
   if (!show) return null;
   return (
-    <div className="absolute inset-0 z-[110] flex items-center justify-center pointer-events-none animate-pop">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center pointer-events-none animate-pop">
       <div className="absolute inset-0 bg-black/30" />
       <div className="relative text-center">
         <div className="text-6xl font-extrabold bg-gradient-to-r from-amber-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent animate-celebrate">
