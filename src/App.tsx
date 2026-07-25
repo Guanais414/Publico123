@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import type { UserProfile, GameState, RoutineTask, MealSuggestion, AppSettings, Screen, DiaryMeal } from './types';
 import {
@@ -11,22 +11,23 @@ import { supabase } from './supabaseClient';
 import { BackgroundLayer } from './components/BackgroundLayer';
 import { Auth } from './components/Auth';
 import { Onboarding } from './components/Onboarding';
-import { Home } from './components/Home';
-import { Agenda } from './components/Agenda';
-import { Studies } from './components/Studies';
-import { Health } from './components/Health';
-import { Achievements } from './components/Achievements';
-import { MascotPond } from './components/MascotPond';
-import { Shop } from './components/Shop';
-import { Leaderboard } from './components/Leaderboard';
-import { Profile } from './components/Profile';
-import { BambooForest } from './components/BambooForest';
-import { ForestMap } from './components/ForestMap';
-import { Community } from './components/Community';
 import { AmbientMusic, playSoundEffect } from './components/AmbientMusic';
 import { NotificationSystem } from './components/Notifications';
 import { Home as HomeIcon, Calendar, BookOpen, Heart, Sparkles, Trophy, User, Map, Users } from 'lucide-react';
 import { useConfetti, ConfettiLayer, LevelUpOverlay } from './components/Dopamine';
+
+const Home = lazy(() => import('./components/Home').then((m) => ({ default: m.Home })));
+const Agenda = lazy(() => import('./components/Agenda').then((m) => ({ default: m.Agenda })));
+const Studies = lazy(() => import('./components/Studies').then((m) => ({ default: m.Studies })));
+const Health = lazy(() => import('./components/Health').then((m) => ({ default: m.Health })));
+const Achievements = lazy(() => import('./components/Achievements').then((m) => ({ default: m.Achievements })));
+const MascotPond = lazy(() => import('./components/MascotPond').then((m) => ({ default: m.MascotPond })));
+const Shop = lazy(() => import('./components/Shop').then((m) => ({ default: m.Shop })));
+const Leaderboard = lazy(() => import('./components/Leaderboard').then((m) => ({ default: m.Leaderboard })));
+const Profile = lazy(() => import('./components/Profile').then((m) => ({ default: m.Profile })));
+const BambooForest = lazy(() => import('./components/BambooForest').then((m) => ({ default: m.BambooForest })));
+const ForestMap = lazy(() => import('./components/ForestMap').then((m) => ({ default: m.ForestMap })));
+const Community = lazy(() => import('./components/Community').then((m) => ({ default: m.Community })));
 
 // Awards removed from nav — achievements now live on Home. Community added.
 const NAV_ITEMS: { id: Screen; label: string; icon: typeof HomeIcon }[] = [
@@ -331,6 +332,11 @@ export default function App() {
       <NotificationSystem onNavigate={(s) => setScreen(s as Screen)} />
       <div className="min-h-screen text-gray-900 dark:text-gray-100 transition-colors">
         <main className="pb-24 min-h-screen">
+          <Suspense fallback={
+            <div className="flex items-center justify-center h-[60vh]">
+              <div className="w-8 h-8 rounded-full border-2 border-green-500 border-t-transparent animate-spin" />
+            </div>
+          }>
           {screen === 'home' && (
             <Home profile={profile} game={game} settings={settings} tasks={tasks} meals={meals}
               waterMl={waterMl} mood={mood} onNavigate={(s) => setScreen(s as Screen)} onGainXp={gainXp} />
@@ -359,6 +365,7 @@ export default function App() {
               onUpdateSettings={handleUpdateSettings} onUpdateProfile={handleUpdateProfile}
               onReset={handleReset} onGainXp={gainXp} onSignOut={handleSignOut} userId={userId} />
           )}
+          </Suspense>
         </main>
 
         <ConfettiLayer particles={particles} />
