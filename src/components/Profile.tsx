@@ -288,7 +288,7 @@ export function Profile({ profile, game, settings, onUpdateSettings, onUpdatePro
         )}
       </Section>
 
-      <p className="text-center text-xs text-gray-400 pt-2">LifeFlow AI v2.0 · Your personal life manager</p>
+      <p className="text-center text-xs text-gray-400 pt-2">Dango v2.0 · Your personal life manager</p>
 
       {/* Modals */}
       {showAchievements && <Achievements game={game} onClose={() => setShowAchievements(false)} onGainXp={onGainXp} />}

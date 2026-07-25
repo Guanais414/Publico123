@@ -179,7 +179,7 @@ export default function App() {
     setTasks(generateRoutine(p));
     setMeals(generateMeals(p));
     setGame(updateStreak(defaultGameState));
-    showToast('Welcome to LifeFlow AI!');
+    showToast('Welcome to Dango!');
   };
 
   const handleSignOut = async () => {

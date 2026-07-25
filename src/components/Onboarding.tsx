@@ -62,7 +62,7 @@ export function Onboarding({ onComplete }: Props) {
       {stepName === 'welcome' && (
         <div className="text-center animate-fade-in">
           <Mascot type="otter" size={120} mood="excited" />
-          <h1 className="text-3xl font-extrabold mt-4 bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">LifeFlow AI</h1>
+          <h1 className="text-3xl font-extrabold mt-4 bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">Dango</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-3">Your personal life manager. Let's set up your perfect routine together.</p>
           <button onClick={next} className="mt-8 w-full bg-indigo-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-500/30 active:scale-95 transition-transform">
             Get Started
@@ -273,7 +273,7 @@ export function Onboarding({ onComplete }: Props) {
           <p className="text-gray-500 dark:text-gray-400 mt-2 mb-6">Your AI companion is generating your personalized routine...</p>
           <button onClick={() => onComplete({ ...p, onboarded: true })}
             className="w-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold py-4 rounded-2xl shadow-lg active:scale-95 transition-transform">
-            Enter LifeFlow
+            Enter Dango
           </button>
         </div>
       )}

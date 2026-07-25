@@ -73,7 +73,7 @@ export function Auth({ onAuthSuccess }: Props) {
             <Mascot type="otter" size={100} mood="excited" />
           </div>
           <h1 className="text-3xl font-extrabold mt-3 bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">
-            LifeFlow AI
+            Dango
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
             Your personal life manager
