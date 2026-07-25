@@ -5,10 +5,35 @@
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;
+    height: 100%;
   }
   body {
     @apply antialiased;
     overscroll-behavior: none;
+    height: 100%;
+    margin: 0;
+    background: #0a0a0a;
+  }
+  #root {
+    height: 100%;
+  }
+  @media (min-width: 640px) {
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    #root {
+      width: 390px;
+      max-width: 100%;
+      height: min(844px, calc(100vh - 2rem));
+      border-radius: 2.5rem;
+      overflow: hidden;
+      box-shadow: 0 0 0 12px #1a1a1a, 0 0 0 14px #2a2a2a, 0 25px 60px rgba(0, 0, 0, 0.5);
+      position: relative;
+      transform: translateZ(0);
+    }
   }
 }
 
@@ -229,6 +254,16 @@
 /* Hide scrollbars but keep scroll */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Safe area helpers for phone frame */
+.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.pl-safe { padding-left: env(safe-area-inset-left, 0px); }
+.pr-safe { padding-right: env(safe-area-inset-right, 0px); }
+.mt-safe { margin-top: env(safe-area-inset-top, 0px); }
+.mb-safe { margin-bottom: env(safe-area-inset-bottom, 0px); }
+.h-dynamic { height: 100dvh; }
+.min-h-dynamic { min-height: 100dvh; }
 
 /* Range slider styling */
 input[type="range"] {
